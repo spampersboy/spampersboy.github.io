@@ -1,5 +1,5 @@
 <html lang="en"><head>
-	<title>HEAD</title>
+	<title>head</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -85,14 +85,18 @@
 	<style type="text/css">
 		body {
 			margin: 0;
-			padding-top: 40vh;
-			background-color: #FBFBFB;
+			background-color: #eee;
 		}
 		.form-control {
-			border-color: #007bff;
-			font-size: 1.05rem;
+			border-color: white;
+			font-size: 1.2rem;
+			width: 300px;
+			max-width: 300px;
 		}
 		.input-group {
+			position: absolute;
+			bottom: 0.5rem;
+			left: 0.5rem;
 			max-width: 330px;
 			margin: 0 auto;
 		}
@@ -131,23 +135,20 @@
 			outline: 0;
 			outline-offset: 0;
 		}
-		.center {
-			text-align: center;
-			color: #999;
-		}
 	</style>
 </head>
 <body>
-<div class="container">
+
+	<div class="container" style="text-align: center">
+	<div style="padding-top: 40vh">
+		<br><code>Mouse Wheel</code> or <code>Trackpad</code> to zoom
+		<br><code>Shift+Drag</code> to rotate
+	</div>
 	<div class="input-group" id="enterUrl">
 		<input id="url" type="text" class="form-control" placeholder="image URL">
 		<span class="input-group-btn" onclick="getMap()">
-			<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">GO</button>
+			<button class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#myModal">head</button>
 		</span>
-	</div>
-	<div class="center">
-		<br><code>Mouse Wheel</code> to zoom
-		<br><code>Shift+Drag</code> to rotate
 	</div>
 
 	<!-- Modal -->
