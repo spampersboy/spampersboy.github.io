@@ -57,7 +57,7 @@
 				map.setView(new ol.View({
 						projection: projection,
 						center: ol.extent.getCenter(extent),
-						zoom: 1,
+						zoom: 2,
 						maxZoom: 8
 					})
 				);
@@ -74,7 +74,7 @@
 					view: new ol.View({
 						projection: projection,
 						center: ol.extent.getCenter(extent),
-						zoom: 1,
+						zoom: 2,
 						maxZoom: 8
 					}),
 					controls: []
@@ -145,10 +145,10 @@
 <body>
 
 	<div class="container" style="text-align: center">
-	<div style="padding-top: 40vh">
+	<!--<div style="padding-top: 40vh">
 		<br><code>Mouse Wheel</code> or <code>Trackpad</code> to zoom
 		<br><code>Shift+Drag</code> to rotate
-	</div>
+	</div>-->
 	<div class="input-group" id="enterUrl">
 		<input id="url" type="text" class="form-control" placeholder="image URL">
 		<span class="input-group-btn" onclick="getMap()">
