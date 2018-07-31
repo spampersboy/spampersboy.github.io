@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>BODY</title>
+<link rel="stylesheet" type="text/css">
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script src="ol-modified.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Roboto:100&amp;lang=ru' rel='stylesheet' type='text/css'>
+<style type="text/css">
+	html, body, .map {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+	body {
+		background-color: #F5F5F5;
+	}
+	.plus {
+		position: absolute;
+		top: 0.5rem;
+		left: 0.5rem;
+		height: 1.8rem;
+		width: auto;
+	}
+	.middle {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 1.5rem;
+		width: 85%;
+	}
+	input {
+		z-index: 9999;
+		position: absolute;
+		outline: 0;
+		outline-offset: 0;
+	}
+	.lenta {
+		width: 100%;
+		margin: 33px auto;
+		max-width: 100%;
+		position: absolute;
+		text-align: center;
+		top: 1rem;
+	}
+	.post {
+		margin: 0 3%;
+		padding-bottom: 26px;
+		max-width: 100%;
+	}
+	.text {
+		font-family: "Roboto", sans-serif;
+		font-weight: 100;
+		font-style:normal;
+		color: #FFF;
+		line-height: 1.2;
+		letter-spacing: -1px;
+		font-size: 3rem;
+	}
+	a {
+		text-decoration: none;
+	}
+</style>
+</head>
+<body>
+	<div class="lenta">
+		<div class="post">
+			<h1><a class="text" href="http://www.donationalerts.com/r/mixer_lol" target="_blank">DONATE</a></h1>
+		</div>
+	</div>
+<input style="display: none" type="file" id="enterUrl">
+<!--<input type="button" value="Browse..." onclick="document.getElementById('enterUrl').click();">-->
+<input type="image" class="plus" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDYwIDYwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA2MCA2MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxnPgoJPHBhdGggZD0iTTAsMHY2MGg2MFYwSDB6IE01OCw1OEgyVjJoNTZWNTh6IiBmaWxsPSIjYjBiMGIwIi8+Cgk8cG9seWdvbiBwb2ludHM9IjI5LDUxIDMxLDUxIDMxLDMxIDUxLDMxIDUxLDI5IDMxLDI5IDMxLDkgMjksOSAyOSwyOSA5LDI5IDksMzEgMjksMzEgICIgZmlsbD0iI2IwYjBiMCIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" onclick="document.getElementById('enterUrl').click();">
+<input type="image" class="middle" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+<div id="map" class="map">
+</div>
+  <script>
+	  document.onkeyup = function (e) {
+		  e = e || window.event;
+		  if (e.keyCode === 13) {
+            let enterUrl = document.getElementById('enterUrl');
+            enterUrl.click();
+		  }
+		  return false;
+	  };
+
+	  let map;
+      let image = new Image();
+      let layer;
+	  let projection;
+	  let extent;
+	  document.getElementById('enterUrl').addEventListener('change', () => {
+        let reader = new FileReader();
+        reader.onload = function(event){
+			image.src = event.target.result;
+        };
+        reader.readAsDataURL(document.getElementById('enterUrl').files[0]);
+      });
+	  image.onload = makeMap;
+	  function makeMap() {
+		  extent = [0, 0, image.width, image.height];
+		  projection = new ol.proj.Projection({
+			  extent: extent
+		  });
+		  if(map){
+            map.removeLayer(layer);
+            layer = new ol.layer.Image({source: new ol.source.ImageStatic({
+              url: image.src,
+              projection: projection,
+              imageExtent: extent,
+            })
+            });
+            map.addLayer(layer);
+		    map.setView(new ol.View({
+                    projection: projection,
+                    center: ol.extent.getCenter(extent),
+                    zoom: 2,
+                    maxZoom: 8
+                })
+            );
+          } else {
+            layer = new ol.layer.Image({source: new ol.source.ImageStatic({
+                  url: image.src,
+                  projection: projection,
+                  imageExtent: extent,
+                })
+            });
+            map = new ol.Map({
+              layers:  [layer],
+              target: 'map',
+              view: new ol.View({
+                  projection: projection,
+                  center: ol.extent.getCenter(extent),
+                  zoom: 2,
+                  maxZoom: 8
+              })
+            });
+          }
+      }
+  </script>
+
+</body></html>
