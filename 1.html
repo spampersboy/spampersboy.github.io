@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>1</title>
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+    <script type='text/javascript' src='./1/jquery.blockUI.js'></script>
+    <script type='text/javascript' src='./1/fabric.min.js'></script>
+    <script type='text/javascript' src='./1/sticker.js'></script>
+    <script type="text/javascript">
+        fabric = (function (f) { var nativeOn = f.on; var dblClickSubscribers = []; var nativeCanvas = f.Canvas; f.Canvas = (function (domId, options) { var canvasDomElement = document.getElementById(domId); var c = new nativeCanvas(domId, options); c.dblclick = function (handler) { dblClickSubscribers.push(handler) }; canvasDomElement.nextSibling.ondblclick = function (ev) { for (var i = 0; i < dblClickSubscribers.length; i++) { console.log(ev); dblClickSubscribers[i]({ e: ev }); } }; return c; }); return f; } (fabric)); 
+    </script>
+    <style type='text/css'>
+        canvas
+        {
+            border-width: 1px;
+            border-style: solid;
+            border-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <button id="insertImage">
+        insertImage</button>
+    <button id="sendBackwards">
+        sendBackwards</button>
+    <button id="bringForward">
+        bringForward</button>
+    <canvas id="c" width="1000" height="1000">
+    </canvas>
+    <div id="insertImageForm" style="display: none">
+        <p>
+            <label>
+                請選擇檔案:</label>
+            <input id="imageInput" type="file">
+        </p>
+    </div>
+</body>
+</html>
